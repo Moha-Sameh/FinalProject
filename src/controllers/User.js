@@ -45,7 +45,7 @@ exports.signIn = (req, res, next) => {
       exp: Date.now() + parseInt(process.env.JWT_EXPIRATION_MS),
     };
     const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET);
-    res.jason({ token });
+    res.json({ token });
   } catch (error) {
     next(error);
   }

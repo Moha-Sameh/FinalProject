@@ -15,10 +15,6 @@ router.param("id", async (req, _, next, id) => {
 
 //Routes
 router.post("/register", upload.single("image"), signUp);
-router.post(
-  "/login",
-  passport.authenticate("local", { session: false }),
-  signIn
-);
+router.post("/", passport.authenticate("local", { session: false }), signIn);
 
 module.exports = router;

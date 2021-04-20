@@ -4,17 +4,29 @@ module.exports = (sequelize, DataTypes) => {
   class User extends Model {}
   User.init(
     {
-      firstName: DataTypes.STRING,
-      lastName: DataTypes.STRING,
-      username: DataTypes.STRING,
-      password: DataTypes.INTEGER,
+      firstName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       role: DataTypes.STRING,
       civilId: {
         type: DataTypes.INTEGER,
         allowNull: false,
       },
       phonenumber: {
-        type: DataTypes.CHAR,
+        type: DataTypes.INTEGER,
         allowNull: false,
       },
       image: DataTypes.STRING,
