@@ -23,8 +23,11 @@ exports.signUp = async (req, res, next) => {
     const newUser = await User.create(req.body);
     const payload = {
       id: newUser.id,
-      username: newUser.username,
-      exp: Date.now() + process.env.JWT_EXPIRATION_MS,
+      firstName: newUser.firstName,
+      username: newUser.usernam,
+      role: newUser.role,
+      image: newUser.image,
+      exp: Date.now() + parseInt(process.env.JWT_EXPIRATION_MS),
     };
     const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET);
     res.status(201).json({ token });

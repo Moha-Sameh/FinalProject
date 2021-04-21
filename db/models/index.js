@@ -48,6 +48,36 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-//Migrations
+//Association User and Emergency
+//React-Native user request
+db.User.hasMany(db.Emergency, {
+  foreignKey: "requesterId",
+  allowNull: false,
+});
+db.Emergency.belongsTo(db.User, {
+  foreignKey: "requesterId",
+  allowNull: false,
+  as: "Requester",
+});
+//Dashboard operation response
+db.User.hasMany(db.Emergency, {
+  foreignKey: "responderId",
+  allowNull: true,
+});
+db.Emergency.belongsTo(db.User, {
+  foreignKey: "responderId",
+  allowNull: true,
+});
+//Association Between Emergencies and Emergency Type
+db.EmergencyType.hasMany(db.Emergency, {
+  foreignKey: "typeId",
+  allowNull: false,
+  as: "Emergencies",
+});
+db.Emergency.belongsTo(db.EmergencyType, {
+  foreignKey: "typeId",
+  allowNull: false,
+  as: "Types",
+});
 
 module.exports = db;
