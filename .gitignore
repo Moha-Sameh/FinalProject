@@ -12,6 +12,9 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 # Runtime data
 pids
 *.pid
+
+#Ignore React native app
+Panick-App/*
 *.seed
 *.pid.lock
 
@@ -118,3 +121,6 @@ dist
 
 #media file ignore
 media/*
+
+#Ignore React native app
+Panick-App/*

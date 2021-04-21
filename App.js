@@ -6,6 +6,8 @@ const db = require("./db/models");
 
 //Routers Require
 const User = require("./src/routers/User");
+const Type = require("./src/routers/EmergencyType");
+const Panick = require("./src/routers/Emergency");
 
 //Passoprt Strategies
 const { localStrategy, jwtStrategy } = require("./src/middleware/passport");
@@ -28,7 +30,9 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 //Routes
-app.use("/login", User);
+app.use("/", User);
+app.use("/", Type);
+app.use("/", Panick);
 //multer
 
 //App Start
