@@ -28,13 +28,13 @@ passport.use(localStrategy);
 passport.use(jwtStrategy);
 
 //Routes
-app.use("/", User);
+app.use("/login", User);
 //multer
 
 //App Start
 const run = async () => {
   try {
-    await db.sequelize.sync({ force: true });
+    await db.sequelize.sync({ force: false });
   } catch (error) {
     console.error("Error connecting to the database: ", error);
   }
