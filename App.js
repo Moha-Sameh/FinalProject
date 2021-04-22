@@ -3,6 +3,7 @@ const cors = require("cors");
 const passport = require("passport");
 const app = express();
 const db = require("./db/models");
+const path = require("path");
 
 //Routers Require
 const User = require("./src/routers/User");
@@ -33,7 +34,9 @@ passport.use(jwtStrategy);
 app.use("/", User);
 app.use("/", Type);
 app.use("/", Panick);
+
 //multer
+app.use("/media", express.static(path.join(__dirname, "media")));
 
 //App Start
 const run = async () => {

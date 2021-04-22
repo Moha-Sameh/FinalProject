@@ -5,6 +5,7 @@ const {
   createType,
   emergencyTypes,
 } = require("../controllers/EmergencyType");
+const upload = require("../middleware/multer");
 
 //Param
 router.param("id", async (req, _, next, id) => {
@@ -16,6 +17,6 @@ router.param("id", async (req, _, next, id) => {
 
 //Routes
 router.get("/type", emergencyTypes);
-router.post("/type", createType);
+router.post("/type", upload.single("image"), createType);
 
 module.exports = router;

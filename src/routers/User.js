@@ -1,7 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const { findUser, signIn, signUp } = require("../controllers/User");
+const {
+  findUser,
+  signIn,
+  signUp,
+  usertable,
+  operationtable,
+} = require("../controllers/User");
 const upload = require("../middleware/multer");
 //Controller Required
 
@@ -14,9 +20,11 @@ router.param("id", async (req, _, next, id) => {
 });
 
 //Routes
-router.post("/register", upload.single("image"), signUp);
+router.get("/user", usertable);
+router.get("/operation", operationtable);
+router.post("/signup", upload.single("image"), signUp);
 router.post(
-  "/login",
+  "/signin",
   passport.authenticate("local", { session: false }),
   signIn
 );

@@ -1,6 +1,7 @@
 const { User } = require("../../db/models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const { Op } = require("sequelize");
 
 //Find A user by PK
 exports.findUser = async (id, next) => {
@@ -49,6 +50,48 @@ exports.signIn = (req, res, next) => {
     };
     const token = jwt.sign(JSON.stringify(payload), process.env.JWT_SECRET);
     res.json({ token });
+  } catch (error) {
+    next(error);
+  }
+};
+
+//Find all application users
+exports.usertable = async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      where: {
+        role: null,
+      },
+      attributes: {
+        exclude: [
+          "password",
+          "username",
+          "createdAt",
+          "updatedAt",
+          "image",
+          "role",
+        ],
+      },
+    });
+    res.json(users);
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.operationtable = async (req, res, next) => {
+  try {
+    const operationTeam = await User.findAll({
+      where: {
+        role: {
+          [Op.not]: null,
+        },
+      },
+      attributes: {
+        exclude: ["password", "username", "createdAt", "updatedAt", "image"],
+      },
+    });
+    res.json(operationTeam);
   } catch (error) {
     next(error);
   }
