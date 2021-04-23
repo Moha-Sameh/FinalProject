@@ -6,6 +6,9 @@ module.exports = (sequelize, DataTypes) => {
     {
       media: DataTypes.STRING,
       location: DataTypes.STRING,
+      status: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,

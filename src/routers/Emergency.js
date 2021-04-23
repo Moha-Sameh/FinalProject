@@ -6,6 +6,7 @@ const {
   findType,
   findUser,
   emergencyRequest,
+  respondEmergency,
 } = require("../controllers/Emergency");
 const router = express.Router();
 
@@ -20,13 +21,19 @@ router.param("id", async (req, res, next, id) => {
 });
 
 //Routes
-router.get("/emergencies", viewEmergency);
+router.get("/emergency", viewEmergency);
 router.post(
   "/emergency",
   passport.authenticate("jwt", { session: false }),
   findType,
   findUser,
   emergencyRequest
+);
+router.put(
+  "/emergency/:id",
+  passport.authenticate("jwt", { session: false }),
+  findUser,
+  respondEmergency
 );
 
 module.exports = router;

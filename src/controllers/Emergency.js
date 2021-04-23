@@ -45,6 +45,7 @@ exports.emergencyRequest = async (req, res, next) => {
   try {
     req.body.typeId = req.type.id;
     req.body.requesterId = req.user.id;
+    req.body.status = "Pending";
     const newRequest = await Emergency.create(req.body);
     res.json(newRequest);
   } catch (error) {
@@ -88,6 +89,17 @@ exports.viewEmergency = async (req, res, next) => {
       ],
     });
     res.json(Emergencies);
+  } catch (error) {
+    next(error);
+  }
+};
+
+//Update
+exports.respondEmergency = async (req, res, next) => {
+  try {
+    req.body.responderId = req.user.id;
+    await req.emergency.update(req.body);
+    res.status(204).end();
   } catch (error) {
     next(error);
   }
