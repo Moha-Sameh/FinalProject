@@ -8,6 +8,8 @@ const {
   emergencyRequest,
   respondEmergency,
 } = require("../controllers/Emergency");
+const upload = require("../middleware/multer");
+
 const router = express.Router();
 
 //Param
@@ -25,6 +27,7 @@ router.get("/emergency", viewEmergency);
 router.post(
   "/emergency",
   passport.authenticate("jwt", { session: false }),
+  upload.single("image"),
   findType,
   findUser,
   emergencyRequest
