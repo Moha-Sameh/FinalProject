@@ -43,6 +43,9 @@ exports.findUser = async (req, _, next) => {
 //New Emergency request by User
 exports.emergencyRequest = async (req, res, next) => {
   try {
+    if (req.file) {
+      req.body.media = `http://${req.get("host")}/media/${req.file.filename}`;
+    }
     req.body.typeId = req.type.id;
     req.body.requesterId = req.user.id;
     req.body.status = "Pending";
@@ -57,33 +60,19 @@ exports.viewEmergency = async (req, res, next) => {
   try {
     const Emergencies = await Emergency.findAll({
       attributes: {
-        exclude: [
-          "createdAt",
-          "updatedAt",
-          "id",
-          "requesterId",
-          "responderId",
-          "typeId",
-        ],
+        exclude: ["requesterId", "responderId", "typeId"],
       },
       include: [
         {
           model: EmergencyType,
           as: "Types",
-          attributes: { exclude: ["risk", "id", "createdAt", "updatedAt"] },
+          attributes: { exclude: ["risk", "createdAt", "updatedAt"] },
         },
         {
           model: User,
           as: "Requester",
           attributes: {
-            exclude: [
-              "id",
-              "createdAt",
-              "updatedAt",
-              "password",
-              "username",
-              "role",
-            ],
+            exclude: ["id", "updatedAt", "password", "username", "role"],
           },
         },
       ],
