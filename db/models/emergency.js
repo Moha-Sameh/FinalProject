@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
       status: {
         type: DataTypes.STRING,
       },
+      lat: {
+        type: DataTypes.STRING,
+      },
+      lng: {
+        type: DataTypes.STRING,
+      },
     },
     {
       sequelize,

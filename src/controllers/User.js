@@ -25,7 +25,7 @@ exports.signUp = async (req, res, next) => {
     const payload = {
       id: newUser.id,
       firstName: newUser.firstName,
-      username: newUser.usernam,
+      username: newUser.username,
       role: newUser.role,
       image: newUser.image,
       exp: Date.now() + parseInt(process.env.JWT_EXPIRATION_MS),
@@ -43,7 +43,7 @@ exports.signIn = (req, res, next) => {
     const payload = {
       id: user.id,
       firstName: user.firstName,
-      username: user.usernam,
+      username: user.username,
       role: user.role,
       image: user.image,
       exp: Date.now() + parseInt(process.env.JWT_EXPIRATION_MS),
@@ -63,14 +63,7 @@ exports.usertable = async (req, res, next) => {
         role: null,
       },
       attributes: {
-        exclude: [
-          "password",
-          "username",
-          "createdAt",
-          "updatedAt",
-          "image",
-          "role",
-        ],
+        exclude: ["password", "createdAt", "updatedAt", "role"],
       },
     });
     res.json(users);
@@ -88,7 +81,7 @@ exports.operationtable = async (req, res, next) => {
         },
       },
       attributes: {
-        exclude: ["password", "username", "createdAt", "updatedAt", "image"],
+        exclude: ["password", "createdAt", "updatedAt"],
       },
     });
     res.json(operationTeam);
