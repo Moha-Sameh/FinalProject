@@ -17,7 +17,7 @@ exports.findUser = async (id, next) => {
 exports.signUp = async (req, res, next) => {
   try {
     if (req.file) {
-      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+      req.body.image = `/media/${req.file.filename}`;
     }
     const hashedPassword = await bcrypt.hash(req.body.password, 10);
     req.body.password = hashedPassword;

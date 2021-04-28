@@ -44,7 +44,7 @@ exports.findUser = async (req, _, next) => {
 exports.emergencyRequest = async (req, res, next) => {
   try {
     if (req.file) {
-      req.body.media = `http://${req.get("host")}/media/${req.file.filename}`;
+      req.body.media = `/media/${req.file.filename}`;
     }
     req.body.typeId = req.type.id;
     req.body.requesterId = req.user.id;

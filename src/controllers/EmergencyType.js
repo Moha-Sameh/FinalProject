@@ -12,7 +12,7 @@ exports.findType = async (id, next) => {
 exports.createType = async (req, res, next) => {
   try {
     if (req.file) {
-      req.body.image = `http://${req.get("host")}/media/${req.file.filename}`;
+      req.body.image = `/media/${req.file.filename}`;
     }
     const newType = await EmergencyType.create(req.body);
     res.json(newType);
